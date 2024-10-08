@@ -1,0 +1,52 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/1656dcfddc.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="contact-right" >
+        <form name="submit-to-google-sheet">
+            <input type="text" name="Name" placeholder="Your Name" required>
+            <input type="text" name="Email" placeholder="Your Email" required>
+            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+            <button type="submit" class="btn btn2">Submit</button>
+            <span id="msg"></span>
+        </form>
+
+    </div>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyIBuVxOeJVL4upo4izu3broKkb-cW-UoxqfVfF7Grs6n7tpnGe-AVRXIlrFDBWxOBo1w/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg  = document.getElementById("msg")
+      
+        {/*To change the response we set the msg.innerHTML = OUR OWN MESSAGE*/}
+        
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    
+    
+        
+          
+          
+            .then(response => {
+                msg.innerHTML = "Message sent Successfully"
+                setTimeout(function(){
+                    msg.innerHTML = ""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+    
+</body>
+</html>
+
+Add DevOps project 1 to the root
